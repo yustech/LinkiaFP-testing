@@ -1,58 +1,421 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Linkia Demo · Estudiante de DAW</title>
-  <meta name="description" content="Portfolio de Linkia Demo, estudiante de Desarrollo de Aplicaciones Web en Linkia FP.">
-  <link rel="icon" href="avatar.svg">
-  <link rel="stylesheet" href="estilos.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio de desarrollo web: proyectos, formación y contacto.">
+  <meta name="theme-color" content="#11201b">
+  <title>Tu Nombre | Desarrollo web</title>
+  <style>
+    :root {
+      --dark: #11201b;
+      --dark-2: #1c3028;
+      --paper: #f6f7f2;
+      --white: #ffffff;
+      --ink: #192720;
+      --muted: #63736a;
+      --line: #dbe2d9;
+      --lime: #c7f36b;
+      --radius: 22px;
+      --shadow: 0 18px 50px rgba(17, 32, 27, .07);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; color: var(--ink); background: var(--paper); }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; }
+    [hidden] { display: none !important; }
+    ::selection { background: var(--lime); color: var(--dark); }
+    :focus-visible { outline: 3px solid #75ad34; outline-offset: 4px; }
+    section { scroll-margin-top: 90px; }
+    .container { width: min(1160px, calc(100% - 44px)); margin: 0 auto; }
+    .skip-link { position: absolute; top: -60px; left: 12px; z-index: 200; padding: 12px 16px; background: var(--lime); }
+    .skip-link:focus { top: 12px; }
+
+    /* Navegación */
+    .site-header { position: sticky; top: 0; z-index: 100; background: rgba(17, 32, 27, .97); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,.1); }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 25px; }
+    .logo { color: white; font-size: 1.14rem; font-weight: 800; letter-spacing: -.07em; white-space: nowrap; }
+    .logo span { color: var(--lime); }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a { color: #d3ded5; font-size: .91rem; transition: color .2s; }
+    .nav-links a:hover, .nav-links a:focus-visible { color: var(--lime); }
+    .nav-links .nav-contact { color: var(--dark); background: var(--lime); padding: 11px 17px; border-radius: 100px; font-weight: 700; }
+    .nav-links .nav-contact:hover { color: var(--dark); background: #d9ff92; }
+    .menu-button { display: none; padding: 9px 12px; color: white; background: transparent; border: 1px solid #4b6156; border-radius: 10px; }
+
+    /* Portada */
+    .hero { position: relative; overflow: hidden; color: white; background: var(--dark); }
+    .hero::before { content: ""; position: absolute; width: 740px; height: 740px; right: -370px; top: -240px; border-radius: 50%; background: radial-gradient(circle, rgba(199,243,107,.14), transparent 65%); pointer-events: none; }
+    .hero::after { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,.07) 1px, transparent 1px); background-size: 26px 26px; mask-image: linear-gradient(90deg, transparent, black); pointer-events: none; }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 60px; min-height: 620px; padding: 84px 0 100px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 26px; color: #d6e5d8; font-size: .78rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    .dot { width: 9px; height: 9px; flex: none; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 5px rgba(199,243,107,.11); }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: 25px; font-size: clamp(3.5rem, 6.6vw, 6.6rem); line-height: .99; letter-spacing: -.085em; font-weight: 800; }
+    h1 em { color: var(--lime); font-family: Georgia, serif; font-weight: 400; letter-spacing: -.075em; }
+    .hero-intro { max-width: 570px; color: #c1cec5; font-size: 1.12rem; line-height: 1.8; }
+    .hero-intro strong { color: white; font-weight: 650; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 35px; }
+    .button { display: inline-flex; justify-content: center; align-items: center; gap: 11px; min-height: 48px; padding: 13px 20px; border-radius: 100px; font-size: .94rem; font-weight: 750; transition: transform .2s, background .2s, border-color .2s; }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { color: var(--dark); background: var(--lime); }
+    .button-primary:hover { background: #ddff9b; }
+    .button-secondary { color: white; border: 1px solid #5d7165; }
+    .button-secondary:hover { border-color: var(--lime); }
+    .hero-footer { display: flex; flex-wrap: wrap; gap: 16px 28px; margin-top: 52px; color: #91a69a; font-size: .82rem; }
+    .hero-footer span::before { content: "↗"; color: var(--lime); margin-right: 8px; }
+
+    /* Una ventana de código creada con HTML y CSS */
+    .visual { position: relative; min-width: 0; transform: rotate(2deg); }
+    .visual::before { content: ""; position: absolute; z-index: -1; inset: 20px -15px -16px 20px; background: var(--lime); border-radius: 20px; transform: rotate(3deg); }
+    .editor { overflow: hidden; border: 1px solid #425a4d; border-radius: 20px; background: #172921; box-shadow: 0 30px 80px rgba(0,0,0,.3); }
+    .editor-bar { display: flex; align-items: center; gap: 8px; padding: 17px 20px; border-bottom: 1px solid #344a3c; background: #21372b; }
+    .editor-bar i { width: 10px; height: 10px; border-radius: 50%; background: #e58576; }
+    .editor-bar i:nth-child(2) { background: #e8c76f; }
+    .editor-bar i:nth-child(3) { background: #8ecb87; }
+    .editor-title { margin-left: auto; color: #9baea1; font: .78rem Consolas, monospace; }
+    .editor-body { padding: 29px 27px 36px; font: clamp(.78rem, 1.3vw, .95rem)/2.12 Consolas, "Courier New", monospace; white-space: nowrap; }
+    .editor-body .line-number { display: inline-block; width: 28px; color: #597263; user-select: none; }
+    .syntax-purple { color: #d7b0f2; }
+    .syntax-lime { color: #cced89; }
+    .syntax-orange { color: #f3bd86; }
+    .syntax-comment { color: #799585; }
+    .editor-note { position: absolute; right: -28px; bottom: -30px; display: flex; align-items: center; gap: 10px; padding: 15px 18px; border: 1px solid #d4e7bf; border-radius: 13px; background: #f3ffe1; color: #25412d; font-size: .8rem; font-weight: 750; box-shadow: 0 10px 30px rgba(0,0,0,.15); transform: rotate(-4deg); }
+    .editor-note::before { content: "✓"; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--lime); }
+
+    /* Secciones */
+    .section { padding: 108px 0; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 28px; margin-bottom: 40px; }
+    .kicker { color: #53734c; font-size: .77rem; font-weight: 800; letter-spacing: .17em; text-transform: uppercase; }
+    .section h2 { margin: 12px 0 0; font-size: clamp(2.4rem, 4vw, 4.3rem); letter-spacing: -.065em; line-height: 1.08; }
+    .section-subtitle { max-width: 350px; margin: 0; color: var(--muted); line-height: 1.75; }
+
+    /* Filtros y proyectos */
+    .filters { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 26px; }
+    .filter { padding: 10px 16px; border: 1px solid var(--line); border-radius: 100px; background: transparent; color: var(--muted); font-size: .87rem; }
+    .filter[aria-pressed="true"] { border-color: var(--dark); background: var(--dark); color: white; }
+    .projects-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 22px; }
+    .project { overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: white; box-shadow: var(--shadow); transition: transform .25s, box-shadow .25s; }
+    .project:hover { transform: translateY(-5px); box-shadow: 0 24px 50px rgba(17,32,27,.12); }
+    .project-featured { display: grid; grid-template-columns: 1.08fr .92fr; grid-column: 1 / -1; min-height: 360px; }
+    .project-preview { display: grid; place-items: center; min-height: 260px; padding: 25px; position: relative; overflow: hidden; }
+    .project-featured .project-preview { min-height: 360px; }
+    .project-preview::before { content: ""; position: absolute; width: 320px; height: 320px; border: 1px solid rgba(0,0,0,.06); border-radius: 50%; transform: scale(1.3); }
+    .preview-board { background: #e9e6f8; }
+    .preview-shop { background: #e5efe8; }
+    .preview-weather { background: #deecf8; }
+    .mini-board { position: relative; width: min(100%, 370px); padding: 20px; border-radius: 13px; background: #fff; box-shadow: 0 18px 45px rgba(38,31,90,.12); transform: rotate(-4deg); }
+    .mini-title { display: flex; justify-content: space-between; align-items: center; margin-bottom: 17px; font-size: .75rem; font-weight: 800; }
+    .mini-title span { display: inline-block; width: 36px; height: 7px; border-radius: 10px; background: #dcd8f1; }
+    .kanban { display: grid; grid-template-columns: repeat(3,1fr); gap: 9px; }
+    .kanban-col { min-height: 138px; padding: 8px; border-radius: 8px; background: #f5f3fb; }
+    .kanban-label { margin-bottom: 11px; font-size: .55rem; font-weight: 800; color: #6c6489; }
+    .task { height: 36px; margin-bottom: 7px; padding: 9px; border-radius: 6px; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,.04); }
+    .task::before, .task::after { content: ""; display: block; width: 80%; height: 5px; border-radius: 8px; background: #d8d4e9; }
+    .task::after { width: 48%; margin-top: 5px; background: #b9a8f3; }
+    .task.green::after { background: #8cd4b0; }
+    .task.orange::after { background: #f2ba8b; }
+    .mini-shop { position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: center; width: min(100%, 340px); height: 193px; padding: 21px; border: 1px solid #dce6dd; border-radius: 14px; background: #fff; transform: rotate(3deg); box-shadow: 0 18px 35px rgba(17,32,27,.09); }
+    .shop-label { color: #4b695b; font-size: .6rem; letter-spacing: .2em; font-weight: 800; }
+    .shop-name { margin: 9px 0; font-size: 1.25rem; font-weight: 800; line-height: 1.05; letter-spacing: -.05em; }
+    .shop-button { display: inline-block; padding: 7px 12px; border-radius: 100px; background: #244637; color: #fff; font-size: .58rem; }
+    .shop-object { position: relative; height: 135px; border-radius: 12px; background: #eef3e9; }
+    .shop-object::before { content: ""; position: absolute; top: 27px; left: 50%; width: 76px; height: 76px; border: 14px solid #557d64; border-radius: 50%; transform: translateX(-50%); box-shadow: 10px 12px 0 -4px rgba(23,72,39,.13); }
+    .shop-object::after { content: ""; position: absolute; bottom: 12px; left: 50%; width: 78px; height: 7px; border-radius: 50%; background: #c3d5c0; transform: translateX(-50%); }
+    .mini-weather { position: relative; width: min(100%, 330px); padding: 22px; border-radius: 15px; background: #fff; box-shadow: 0 18px 40px rgba(35,83,128,.12); transform: rotate(-3deg); }
+    .weather-top { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
+    .weather-place { color: #467091; font-size: .74rem; font-weight: 800; }
+    .weather-temp { margin: 6px 0; font-size: 3.6rem; font-weight: 750; letter-spacing: -.08em; }
+    .sun { width: 75px; height: 75px; border-radius: 50%; background: #ffc75c; box-shadow: 0 0 0 10px #fff1c7, 0 0 0 20px #fff8e7; }
+    .weather-bars { display: flex; gap: 8px; margin-top: 13px; }
+    .weather-bars span { height: 10px; flex: 1; border-radius: 5px; background: #d7e7f1; }
+    .weather-bars span:nth-child(2) { background: #b1d0e3; }
+    .weather-bars span:nth-child(3) { background: #83b7d6; }
+    .project-body { display: flex; flex-direction: column; justify-content: center; padding: 31px; }
+    .project-index { color: #7b8980; font-size: .75rem; font-weight: 800; letter-spacing: .12em; }
+    .project h3 { margin: 13px 0 14px; font-size: clamp(1.55rem, 2.5vw, 2.1rem); letter-spacing: -.05em; }
+    .project-description { color: var(--muted); line-height: 1.7; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin: 7px 0 23px; }
+    .tag { padding: 7px 10px; border: 1px solid #e1e8df; border-radius: 7px; color: #4a6554; background: #f8faf7; font-size: .75rem; font-weight: 650; }
+    .project-link { width: fit-content; padding-bottom: 4px; border-bottom: 1px solid currentColor; font-weight: 800; font-size: .87rem; }
+    .project-link:hover { color: #42712d; }
+    .filter-status { margin: 15px 0 0; color: var(--muted); font-size: .8rem; }
+
+    /* Formación y habilidades */
+    .about { background: #eaf0e7; }
+    .about-grid { display: grid; grid-template-columns: .95fr 1.05fr; gap: 100px; align-items: start; }
+    .about-copy { margin-top: 22px; max-width: 480px; color: #526357; line-height: 1.9; }
+    .about-card { padding: 32px; border: 1px solid #d6dfd2; border-radius: 20px; background: rgba(255,255,255,.67); }
+    .about-card + .about-card { margin-top: 16px; }
+    .card-overline { margin-bottom: 17px; color: #698068; font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 800; }
+    .about-card h3 { margin-bottom: 9px; font-size: 1.35rem; letter-spacing: -.04em; }
+    .about-card p:last-child { margin-bottom: 0; color: #607268; line-height: 1.7; }
+    .skill-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .skill { padding: 11px 14px; border-radius: 9px; background: #fff; border: 1px solid #d7e2d4; font-size: .86rem; font-weight: 700; }
+
+    /* Contacto y pie */
+    .contact { background: var(--dark); color: white; }
+    .contact-inner { display: grid; grid-template-columns: 1.2fr .8fr; align-items: end; gap: 45px; }
+    .contact .kicker { color: var(--lime); }
+    .contact h2 { max-width: 620px; font-size: clamp(3rem, 6vw, 6rem); }
+    .contact p { max-width: 540px; margin: 22px 0 0; color: #bfd0c2; line-height: 1.8; }
+    .contact-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; padding-bottom: 6px; }
+    .socials { display: flex; flex-wrap: wrap; gap: 21px; }
+    .socials a { color: #d1e0d4; font-size: .9rem; text-decoration: underline; text-underline-offset: 6px; }
+    .socials a:hover { color: var(--lime); }
+    .footer { padding: 25px 0; color: #b5c7ba; background: #0b1712; font-size: .78rem; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+    .footer p { margin: 0; }
+
+    @media (max-width: 920px) {
+      .hero-grid { gap: 42px; grid-template-columns: 1fr; padding: 70px 0 90px; }
+      .hero-copy { max-width: 690px; }
+      .visual { width: min(490px, calc(100% - 20px)); margin: 0 auto; }
+      .about-grid { gap: 50px; }
+      .editor-body { font-size: .9rem; }
+    }
+    @media (max-width: 680px) {
+      .container { width: min(100% - 32px, 1160px); }
+      .nav { min-height: 66px; }
+      .menu-button { display: inline-block; }
+      .nav-links { display: none; position: absolute; top: 66px; left: 0; right: 0; padding: 22px; align-items: stretch; flex-direction: column; gap: 22px; background: #182920; border-bottom: 1px solid #3b5144; }
+      .nav-links.open { display: flex; }
+      .nav-links .nav-contact { text-align: center; }
+      .hero-grid { min-height: auto; padding: 62px 0 84px; }
+      h1 { font-size: clamp(3.15rem, 12vw, 4.9rem); }
+      .hero-intro { font-size: 1rem; }
+      .hero-footer { margin-top: 33px; }
+      .visual { margin-top: 10px; }
+      .editor-note { right: -8px; bottom: -25px; }
+      .section { padding: 75px 0; }
+      .section-heading { display: block; }
+      .section-subtitle { margin-top: 18px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-featured { grid-column: auto; display: block; }
+      .project-featured .project-preview { min-height: 270px; }
+      .about-grid, .contact-inner { grid-template-columns: 1fr; gap: 28px; }
+      .about-card { padding: 25px; }
+      .contact-actions { align-items: flex-start; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+    }
+  </style>
 </head>
 <body>
-  <header class="cabecera">
-    <a class="logo" href="#inicio">Linkia Demo</a>
-    <nav>
-      <a href="#proyectos">Proyectos</a>
-      <a href="#contacto">Contacto</a>
+  <a class="skip-link" href="#contenido">Ir al contenido</a>
+
+  <header class="site-header">
+    <nav class="container nav" aria-label="Navegación principal">
+      <a class="logo" href="#inicio" aria-label="Volver al inicio">tu<span>nombre.</span></a>
+      <button class="menu-button" id="menuButton" aria-controls="navLinks" aria-expanded="false" type="button">Menú ☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#proyectos">Proyectos</a>
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#formacion">Formación</a>
+        <a class="nav-contact" href="#contacto">Contactar ↗</a>
+      </div>
     </nav>
   </header>
 
-  <main>
-    <section id="inicio" class="presentacion">
-      <img src="avatar.svg" alt="Avatar con las iniciales LD" width="140" height="140">
-      <div>
-        <h1>Hola, soy Linkia Demo</h1>
-        <p>Estudio Desarrollo de Aplicaciones Web en Linkia FP. Me gusta crear webs sencillas, rápidas y accesibles.</p>
-        <a class="boton" href="#proyectos">Ver mis proyectos</a>
+  <main id="contenido">
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="dot" aria-hidden="true"></span> Estudiante de Desarrollo de Aplicaciones Web</p>
+          <h1 id="hero-title">Del código<br>a la <em>pantalla.</em></h1>
+          <p class="hero-intro">Hola, soy <strong>[TU NOMBRE]</strong>. Estoy estudiando DAW y me gusta construir webs, entender cómo funcionan y mejorar cada detalle. Este es mi espacio para enseñar lo que voy haciendo por el camino.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#proyectos">Ver mis proyectos <span aria-hidden="true">↗</span></a>
+            <a class="button button-secondary" href="#contacto">Hablemos <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="hero-footer"><span>Abierto a prácticas</span><span>También a oportunidades junior</span></div>
+        </div>
+
+        <div class="visual" aria-label="Ilustración de un editor de código">
+          <div class="editor" aria-hidden="true">
+            <div class="editor-bar"><i></i><i></i><i></i><span class="editor-title">sobre-mi.js</span></div>
+            <div class="editor-body">
+              <div><span class="line-number">01</span><span class="syntax-purple">const</span> desarrollador = {</div>
+              <div><span class="line-number">02</span>&nbsp; nombre: <span class="syntax-orange">"Tu nombre"</span>,</div>
+              <div><span class="line-number">03</span>&nbsp; estudios: <span class="syntax-orange">"DAW"</span>,</div>
+              <div><span class="line-number">04</span>&nbsp; stack: [<span class="syntax-lime">"HTML"</span>, <span class="syntax-lime">"CSS"</span>, <span class="syntax-lime">"JS"</span>],</div>
+              <div><span class="line-number">05</span>&nbsp; actitud: <span class="syntax-orange">"seguir aprendiendo"</span></div>
+              <div><span class="line-number">06</span>};</div>
+              <div><span class="line-number">07</span>&nbsp;</div>
+              <div><span class="line-number">08</span><span class="syntax-comment">// El siguiente proyecto empieza aquí.</span></div>
+            </div>
+          </div>
+          <div class="editor-note">En construcción constante</div>
+        </div>
       </div>
     </section>
 
-    <section id="proyectos">
-      <h2>Proyectos</h2>
-      <div class="tarjetas">
-        <article class="tarjeta">
-          <h3>Contador de caracteres</h3>
-          <p>Cuenta los caracteres que quedan mientras escribes. JavaScript y eventos del DOM.</p>
-        </article>
-        <article class="tarjeta">
-          <h3>Validador de contraseñas</h3>
-          <p>Comprueba en tiempo real si una contraseña cumple tres reglas de seguridad.</p>
-        </article>
-        <article class="tarjeta">
-          <h3>Este portfolio</h3>
-          <p>HTML y CSS adaptables a móvil, publicado gratis con GitHub Pages.</p>
-        </article>
+    <section class="section" id="proyectos" aria-labelledby="proyectos-title">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div><span class="kicker">01 / Trabajo práctico</span><h2 id="proyectos-title">Proyectos seleccionados<span aria-hidden="true">.</span></h2></div>
+          <p class="section-subtitle">No hay mejor forma de aprender que enfrentarse a un problema real, probar soluciones y quedarse con lo que funciona.</p>
+        </div>
+
+        <!-- EJEMPLOS: reemplaza estos tres proyectos, descripciones y enlaces por los tuyos antes de publicar. -->
+        <div class="filters" role="group" aria-label="Filtrar proyectos">
+          <button class="filter" data-filter="todos" aria-pressed="true" type="button">Todos</button>
+          <button class="filter" data-filter="javascript" aria-pressed="false" type="button">JavaScript</button>
+          <button class="filter" data-filter="interfaces" aria-pressed="false" type="button">Interfaces</button>
+        </div>
+
+        <div class="projects-grid" id="projectsGrid">
+          <article class="project project-featured reveal" data-category="javascript interfaces">
+            <div class="project-preview preview-board" aria-hidden="true">
+              <div class="mini-board">
+                <div class="mini-title">Tablero de tareas <span></span></div>
+                <div class="kanban">
+                  <div class="kanban-col"><div class="kanban-label">PENDIENTE</div><div class="task"></div><div class="task orange"></div></div>
+                  <div class="kanban-col"><div class="kanban-label">EN CURSO</div><div class="task green"></div></div>
+                  <div class="kanban-col"><div class="kanban-label">HECHO</div><div class="task green"></div><div class="task"></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="project-body">
+              <span class="project-index">PROYECTO / 01</span>
+              <h3>Un tablero para poner orden</h3>
+              <p class="project-description">Una aplicación para organizar tareas por estado, añadir nuevas ideas y llevar el seguimiento de lo que queda por hacer. Un ejercicio de lógica, eventos y manipulación del DOM.</p>
+              <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+              <a class="project-link" href="https://github.com/TU_USUARIO/REPOSITORIO_1" target="_blank" rel="noopener noreferrer" aria-label="Ver el código del proyecto 1 en GitHub">Ver el código ↗</a>
+            </div>
+          </article>
+
+          <article class="project reveal" data-category="interfaces javascript">
+            <div class="project-preview preview-shop" aria-hidden="true">
+              <div class="mini-shop"><div><div class="shop-label">CATÁLOGO</div><div class="shop-name">Objetos<br>cotidianos.</div><span class="shop-button">Explorar ↗</span></div><div class="shop-object"></div></div>
+            </div>
+            <div class="project-body">
+              <span class="project-index">PROYECTO / 02</span>
+              <h3>Catálogo interactivo</h3>
+              <p class="project-description">Una tienda de ejemplo con fichas de producto, categorías y una interfaz adaptada a distintos tamaños de pantalla.</p>
+              <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+              <a class="project-link" href="https://github.com/TU_USUARIO/REPOSITORIO_2" target="_blank" rel="noopener noreferrer" aria-label="Ver el código del proyecto 2 en GitHub">Ver el código ↗</a>
+            </div>
+          </article>
+
+          <article class="project reveal" data-category="javascript">
+            <div class="project-preview preview-weather" aria-hidden="true">
+              <div class="mini-weather"><div class="weather-top"><div><div class="weather-place">MI CIUDAD</div><div class="weather-temp">24°</div><div class="weather-place">Soleado</div></div><div class="sun"></div></div><div class="weather-bars"><span></span><span></span><span></span><span></span></div></div>
+            </div>
+            <div class="project-body">
+              <span class="project-index">PROYECTO / 03</span>
+              <h3>El tiempo, de un vistazo</h3>
+              <p class="project-description">Una interfaz para consultar el tiempo de forma clara. Un buen punto de partida para trabajar con datos, estados y presentación de información.</p>
+              <div class="tags"><span class="tag">JavaScript</span><span class="tag">Interfaces</span></div>
+              <a class="project-link" href="https://github.com/TU_USUARIO/REPOSITORIO_3" target="_blank" rel="noopener noreferrer" aria-label="Ver el código del proyecto 3 en GitHub">Ver el código ↗</a>
+            </div>
+          </article>
+        </div>
+        <p class="filter-status" id="filterStatus" aria-live="polite">Mostrando 3 proyectos</p>
       </div>
     </section>
 
-    <section id="contacto">
-      <h2>Contacto</h2>
-      <p>¿Buscas a alguien para prácticas? Escríbeme por <a href="https://www.linkedin.com/in/tu-usuario">LinkedIn</a> o mira mi código en <a href="https://github.com/linkia-demo-carlos">GitHub</a>.</p>
+    <section class="section about" id="sobre-mi" aria-labelledby="about-title">
+      <div class="container about-grid">
+        <div class="reveal">
+          <span class="kicker">02 / Sobre mí</span>
+          <h2 id="about-title">Aprender, probar, mejorar.</h2>
+          <p class="about-copy">Empecé en desarrollo web porque me interesaba saber qué hay detrás de las páginas que usamos cada día. Ahora, mientras estudio DAW, intento aplicar lo aprendido en proyectos propios y cuidar tanto el código como la experiencia de quien lo utiliza.</p>
+          <p class="about-copy">Busco unas prácticas o una primera oportunidad como desarrollador junior en un equipo donde pueda aportar, hacer preguntas y seguir creciendo.</p>
+        </div>
+        <div id="formacion" class="reveal">
+          <div class="about-card">
+            <p class="card-overline">Formación actual</p>
+            <h3>CFGS Desarrollo de Aplicaciones Web</h3>
+            <p>Primer curso · [NOMBRE DE TU CENTRO]</p>
+            <p>Estoy construyendo una base en programación, estructura web, estilos, JavaScript y control de versiones.</p>
+          </div>
+          <div class="about-card">
+            <p class="card-overline">Tecnologías con las que practico</p>
+            <div class="skill-list" aria-label="Tecnologías"><span class="skill">HTML5</span><span class="skill">CSS3</span><span class="skill">JavaScript</span><span class="skill">Git</span><span class="skill">GitHub</span><span class="skill">VS Code</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact" id="contacto" aria-labelledby="contact-title">
+      <div class="container contact-inner">
+        <div class="reveal">
+          <span class="kicker">03 / Contacto</span>
+          <h2 id="contact-title">¿Hablamos de tu próximo proyecto?</h2>
+          <p>Si buscas a alguien para incorporarse en prácticas o empezar como junior, me encantará conocer el proyecto y contarte en qué estoy trabajando.</p>
+        </div>
+        <div class="contact-actions reveal">
+          <!-- Cambia el correo y los enlaces antes de publicar. -->
+          <a class="button button-primary" href="mailto:tu.correo@ejemplo.com?subject=Contacto%20desde%20tu%20portfolio">Escríbeme un correo ↗</a>
+          <div class="socials">
+            <a href="https://github.com/TU_USUARIO" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+            <a href="https://www.linkedin.com/in/TU_PERFIL" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
-  <footer>
-    <p>© 2026 Linkia Demo</p>
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> [TU NOMBRE]. Hecho con HTML, CSS y JavaScript.</p>
+      <a href="#inicio">Volver arriba ↑</a>
+    </div>
   </footer>
+
+  <script>
+    // Menú para pantallas pequeñas
+    const menuButton = document.getElementById("menuButton");
+    const navLinks = document.getElementById("navLinks");
+
+    function cerrarMenu() {
+      navLinks.classList.remove("open");
+      menuButton.setAttribute("aria-expanded", "false");
+    }
+
+    menuButton.addEventListener("click", () => {
+      const abierto = navLinks.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(abierto));
+    });
+    navLinks.querySelectorAll("a").forEach(enlace => {
+      enlace.addEventListener("click", cerrarMenu);
+    });
+    document.addEventListener("keydown", evento => {
+      if (evento.key === "Escape") cerrarMenu();
+    });
+
+    // Filtros de proyectos
+    const filtros = document.querySelectorAll("[data-filter]");
+    const proyectos = document.querySelectorAll(".project");
+    const filterStatus = document.getElementById("filterStatus");
+
+    filtros.forEach(boton => {
+      boton.addEventListener("click", () => {
+        const categoria = boton.dataset.filter;
+        filtros.forEach(filtro => {
+          filtro.setAttribute("aria-pressed", String(filtro === boton));
+        });
+
+        let visibles = 0;
+        proyectos.forEach(proyecto => {
+          const categorias = proyecto.dataset.category.split(" ");
+          const mostrar = categoria === "todos" || categorias.includes(categoria);
+          proyecto.hidden = !mostrar;
+          if (mostrar) visibles++;
+        });
+        filterStatus.textContent = `Mostrando ${visibles} ${visibles === 1 ? "proyecto" : "proyectos"}`;
+      });
+    });
+
+    // Año actualizado automáticamente
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+  </script>
 </body>
 </html>
