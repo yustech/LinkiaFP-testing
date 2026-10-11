@@ -1,12 +1,58 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <title>Mi portfolio</title>
-  </head>
-  <body>
-    <h1>Hola, soy Linkia Demo</h1>
-    <p>Estudiante de DAW en Linkia FP.</p>
-    <p>Bienvenido a mi portfolio personal.</p>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Linkia Demo · Estudiante de DAW</title>
+  <meta name="description" content="Portfolio de Linkia Demo, estudiante de Desarrollo de Aplicaciones Web en Linkia FP.">
+  <link rel="icon" href="avatar.svg">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <header class="cabecera">
+    <a class="logo" href="#inicio">Linkia Demo</a>
+    <nav>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="inicio" class="presentacion">
+      <img src="avatar.svg" alt="Avatar con las iniciales LD" width="140" height="140">
+      <div>
+        <h1>Hola, soy Linkia Demo</h1>
+        <p>Estudio Desarrollo de Aplicaciones Web en Linkia FP. Me gusta crear webs sencillas, rápidas y accesibles.</p>
+        <a class="boton" href="#proyectos">Ver mis proyectos</a>
+      </div>
+    </section>
+
+    <section id="proyectos">
+      <h2>Proyectos</h2>
+      <div class="tarjetas">
+        <article class="tarjeta">
+          <h3>Contador de caracteres</h3>
+          <p>Cuenta los caracteres que quedan mientras escribes. JavaScript y eventos del DOM.</p>
+        </article>
+        <article class="tarjeta">
+          <h3>Validador de contraseñas</h3>
+          <p>Comprueba en tiempo real si una contraseña cumple tres reglas de seguridad.</p>
+        </article>
+        <article class="tarjeta">
+          <h3>Este portfolio</h3>
+          <p>HTML y CSS adaptables a móvil, publicado gratis con GitHub Pages.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <h2>Contacto</h2>
+      <p>¿Buscas a alguien para prácticas? Escríbeme por <a href="https://www.linkedin.com/in/tu-usuario">LinkedIn</a> o mira mi código en <a href="https://github.com/linkia-demo-carlos">GitHub</a>.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Linkia Demo</p>
+  </footer>
+</body>
 </html>

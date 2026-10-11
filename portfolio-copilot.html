@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Linkia Demo · Desarrollador web junior</title>
+  <meta name="description" content="Portfolio de Linkia Demo, estudiante de DAW en Linkia FP. Busco prácticas o mi primer puesto como desarrollador web.">
+  <link rel="icon" href="avatar.svg">
+  <link rel="stylesheet" href="portfolio-copilot.css">
+  <script src="portfolio-copilot.js" defer></script>
+</head>
+<body>
+  <!-- Archivo creado por Copilot: portfolio-copilot.html (no sustituye a index.html) -->
+  <a class="saltar" href="#proyectos">Saltar al contenido</a>
+
+  <header class="cabecera" id="cabecera">
+    <a class="marca" href="#inicio">linkia<span>.demo</span></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu">Menú</button>
+    <nav id="menu" class="menu">
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#formacion">Formación</a>
+      <a href="#habilidades">Habilidades</a>
+      <a href="#contacto" class="menu-cta">Contacto</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="inicio" class="hero">
+      <div class="hero-texto">
+        <p class="etiqueta"><span class="punto"></span> Disponible para prácticas y trabajo</p>
+        <h1>Hago webs que se entienden a la primera.</h1>
+        <p class="lead">Soy Linkia Demo, estudiante de Desarrollo de Aplicaciones Web. Me gusta que una página cargue rápido, se vea bien en el móvil y no deje fuera a nadie. Estoy buscando un equipo del que aprender y al que aportar desde el primer día.</p>
+        <div class="acciones">
+          <a class="btn btn-principal" href="#proyectos">Ver proyectos</a>
+          <a class="btn btn-borde" href="#contacto">Escríbeme</a>
+        </div>
+      </div>
+      <figure class="hero-foto">
+        <img src="avatar.svg" alt="Avatar con las iniciales LD" width="320" height="320">
+        <figcaption>Madrid · Remoto o híbrido</figcaption>
+      </figure>
+    </section>
+
+    <section class="cifras" aria-label="Datos rápidos">
+      <div><strong data-cuenta="3">3</strong><span>proyectos publicados</span></div>
+      <div><strong data-cuenta="2">2</strong><span>años de ciclo formativo</span></div>
+      <div><strong data-cuenta="5">5</strong><span>tecnologías en el día a día</span></div>
+      <div><strong>100%</strong><span>ganas de aprender</span></div>
+    </section>
+
+    <section id="sobre-mi" class="bloque dos-col">
+      <h2><span class="num">01</span> Sobre mí</h2>
+      <div class="prosa">
+        <p>Empecé en esto por curiosidad: quería saber cómo funcionaba una web por dentro y acabé montando mis propias páginas. Ahora curso DAW en Linkia FP, a distancia, compaginándolo con el resto de mi vida, lo que me ha obligado a organizarme y a resolver las dudas por mi cuenta.</p>
+        <p>Prefiero los proyectos pequeños bien terminados a los grandes a medias. Reviso la accesibilidad, pruebo en el móvil antes de dar nada por bueno y dejo el código lo bastante limpio como para que otra persona lo pueda leer.</p>
+        <p>Fuera del código: me gusta la fotografía y desmontar cosas para ver cómo van.</p>
+      </div>
+    </section>
+
+    <section id="proyectos" class="bloque">
+      <h2><span class="num">02</span> Proyectos</h2>
+      <div class="filtros" role="group" aria-label="Filtrar proyectos">
+        <button class="filtro activo" data-filtro="todos">Todos</button>
+        <button class="filtro" data-filtro="js">JavaScript</button>
+        <button class="filtro" data-filtro="css">HTML y CSS</button>
+      </div>
+      <div class="proyectos">
+        <article class="proyecto" data-tipo="js">
+          <div class="mini mini-contador" aria-hidden="true"><span>124</span>/ 280</div>
+          <div class="proyecto-cuerpo">
+            <h3>Contador de caracteres</h3>
+            <p>Un campo de texto que te dice cuánto te queda por escribir y avisa cuando te acercas al límite. Trabajé los eventos del DOM y la actualización del interfaz sin librerías.</p>
+            <ul class="tags"><li>JavaScript</li><li>DOM</li><li>Eventos</li></ul>
+            <a class="enlace" href="https://github.com/linkia-demo-carlos">Ver código →</a>
+          </div>
+        </article>
+        <article class="proyecto" data-tipo="js">
+          <div class="mini mini-pass" aria-hidden="true"><i></i><i></i><i class="off"></i></div>
+          <div class="proyecto-cuerpo">
+            <h3>Validador de contraseñas</h3>
+            <p>Comprueba en tiempo real tres reglas de seguridad mientras escribes y marca cuáles faltan. Me sirvió para separar bien la lógica de validación de lo que se pinta en pantalla.</p>
+            <ul class="tags"><li>JavaScript</li><li>Expresiones regulares</li><li>UX</li></ul>
+            <a class="enlace" href="https://github.com/linkia-demo-carlos">Ver código →</a>
+          </div>
+        </article>
+        <article class="proyecto" data-tipo="css">
+          <div class="mini mini-web" aria-hidden="true"><b></b><b></b><b></b></div>
+          <div class="proyecto-cuerpo">
+            <h3>Mi portfolio</h3>
+            <p>La web que estás viendo: maquetación adaptable de móvil a escritorio, publicada gratis con GitHub Pages. Sin frameworks, para entender bien lo básico.</p>
+            <ul class="tags"><li>HTML</li><li>CSS</li><li>GitHub Pages</li></ul>
+            <a class="enlace" href="https://github.com/linkia-demo-carlos">Ver código →</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="formacion" class="bloque dos-col">
+      <h2><span class="num">03</span> Formación</h2>
+      <ol class="linea">
+        <li>
+          <span class="fecha">2025 – actualidad</span>
+          <h3>CFGS Desarrollo de Aplicaciones Web</h3>
+          <p>Linkia FP, modalidad a distancia. Programación, bases de datos, entornos de desarrollo, lenguajes de marcas y desarrollo web en cliente y servidor.</p>
+        </li>
+        <li>
+          <span class="fecha">En curso</span>
+          <h3>Proyectos propios y práctica con Git</h3>
+          <p>Control de versiones con GitHub y repaso constante de JavaScript con pequeños retos y ejercicios.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="habilidades" class="bloque">
+      <h2><span class="num">04</span> Habilidades</h2>
+      <div class="skills">
+        <div><h3>Frontend</h3><p>HTML semántico, CSS (flexbox, grid, diseño adaptable), JavaScript</p></div>
+        <div><h3>Backend y datos</h3><p>Nociones de PHP/Java y SQL en el ciclo, en plena ampliación</p></div>
+        <div><h3>Herramientas</h3><p>Git, GitHub, VS Code, DevTools del navegador</p></div>
+        <div><h3>Personales</h3><p>Autonomía, constancia, comunicación clara y ganas de recibir feedback</p></div>
+      </div>
+    </section>
+
+    <section id="contacto" class="contacto">
+      <h2>¿Hablamos?</h2>
+      <p>Si buscas a alguien para prácticas o para sumar a tu equipo, me encantará contarte más.</p>
+      <div class="acciones centro">
+        <a class="btn btn-principal" href="https://www.linkedin.com/in/tu-usuario">LinkedIn</a>
+        <a class="btn btn-borde-claro" href="https://github.com/linkia-demo-carlos">GitHub</a>
+        <button class="btn btn-borde-claro" id="copiarMail" type="button" data-mail="tu-correo@ejemplo.com">Copiar correo</button>
+      </div>
+      <p class="aviso" id="aviso" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <p>© 2026 Linkia Demo · Hecho a mano con HTML, CSS y un poco de JS</p>
+    <a href="#inicio">Volver arriba ↑</a>
+  </footer>
+</body>
+</html>
