@@ -162,6 +162,12 @@
     .contact h2 { max-width: 620px; font-size: clamp(3rem, 6vw, 6rem); }
     .contact p { max-width: 540px; margin: 22px 0 0; color: #bfd0c2; line-height: 1.8; }
     .contact-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; padding-bottom: 6px; }
+    .contact-form { display: grid; gap: 14px; width: 100%; }
+    .contact-form label { display: grid; gap: 6px; font-size: .85rem; color: #d1e0d4; }
+    .contact-form input, .contact-form textarea { width: 100%; padding: 12px 14px; border: 1px solid #3a5242; border-radius: 12px; background: #12241b; color: white; font: inherit; }
+    .contact-form input:focus, .contact-form textarea:focus { outline: 2px solid var(--lime); }
+    .contact-form button { justify-self: start; cursor: pointer; border: 0; }
+    .contact .form-status { margin: 0; font-size: .9rem; color: var(--lime); }
     .socials { display: flex; flex-wrap: wrap; gap: 21px; }
     .socials a { color: #d1e0d4; font-size: .9rem; text-decoration: underline; text-underline-offset: 6px; }
     .socials a:hover { color: var(--lime); }
@@ -351,8 +357,16 @@
           <p>Si buscas a alguien para incorporarse en prácticas o empezar como junior, me encantará conocer el proyecto y contarte en qué estoy trabajando.</p>
         </div>
         <div class="contact-actions reveal">
-          <!-- Cambia el correo y los enlaces antes de publicar. -->
-          <a class="button button-primary" href="mailto:tu.correo@ejemplo.com?subject=Contacto%20desde%20tu%20portfolio">Escríbeme un correo ↗</a>
+          <form class="contact-form" id="contact-form" action="https://formsubmit.co/cyuste@gmail.com" method="POST">
+            <label>Nombre <input type="text" name="name" required maxlength="100" autocomplete="name"></label>
+            <label>Correo <input type="email" name="email" required maxlength="150" autocomplete="email"></label>
+            <label>Mensaje <textarea name="message" rows="5" required maxlength="2000"></textarea></label>
+            <input type="hidden" name="_subject" value="Nuevo mensaje desde tu portfolio">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none">
+            <button class="button button-primary" type="submit">Enviar mensaje ↗</button>
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+          </form>
           <div class="socials">
             <a href="https://github.com/TU_USUARIO" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
             <a href="https://www.linkedin.com/in/TU_PERFIL" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
@@ -411,6 +425,26 @@
         });
         filterStatus.textContent = `Mostrando ${visibles} ${visibles === 1 ? "proyecto" : "proyectos"}`;
       });
+    });
+
+    // Envío del formulario de contacto sin recargar la página
+    const form = document.getElementById("contact-form");
+    const formStatus = document.getElementById("form-status");
+    form.addEventListener("submit", async evento => {
+      evento.preventDefault();
+      formStatus.textContent = "Enviando...";
+      try {
+        const respuesta = await fetch("https://formsubmit.co/ajax/cyuste@gmail.com", {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: new FormData(form)
+        });
+        if (!respuesta.ok) throw new Error();
+        form.reset();
+        formStatus.textContent = "¡Mensaje enviado! Te responderé pronto.";
+      } catch {
+        formStatus.textContent = "No se pudo enviar. Inténtalo de nuevo o escribe a cyuste@gmail.com.";
+      }
     });
 
     // Año actualizado automáticamente
